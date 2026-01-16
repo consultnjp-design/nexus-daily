@@ -1,0 +1,18 @@
+{
+    "name": "Nexus Daily",
+    "short_name": "Nexus Daily",
+    "description": "Premium Habit Tracker with Cloud Sync",
+    "start_url": "./Nexus Daily.html",
+    "display": "standalone",
+    "background_color": "#1e1e2f",
+    "theme_color": "#e73c7e",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2323d5ab'/><stop offset='50%25' stop-color='%23e73c7e'/><stop offset='100%25' stop-color='%23ee7752'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M50 15 L58 42 L85 50 L58 58 L50 85 L42 58 L15 50 L42 42 Z' fill='white'/></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
