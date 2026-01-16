@@ -1574,7 +1574,20 @@
 
         // --- BACKUP ---
         function checkAutoBackup() {
+            // If cloud is connected, we don't need local file backups
+            if (db && userId && isOnline) {
+                const warning = document.getElementById('backupWarning');
+                if (warning) warning.style.display = 'none';
+                return;
+            }
+
             const freq = localStorage.getItem('aurora_backup_freq') || 'never';
+
+            // Default to 'never' if not set, to avoid unwanted downloads
+            if (!localStorage.getItem('aurora_backup_freq')) {
+                localStorage.setItem('aurora_backup_freq', 'never');
+            }
+
             const last = parseInt(localStorage.getItem('aurora_last_backup') || '0');
             const now = Date.now(); const oneDay = 86400000;
             let due = false;
@@ -1586,7 +1599,13 @@
             const sel = document.getElementById('autoBackupSelect'); if (sel) sel.value = freq;
 
             const warning = document.getElementById('backupWarning');
-            if (freq === 'never' && now - last > oneDay * 7) { if (warning) warning.style.display = 'inline-flex'; } else { if (warning) warning.style.display = 'none'; }
+            if (freq === 'never' && now - last > oneDay * 7) {
+                // Only show warning if NOT using cloud
+                if (warning && (!db || !isOnline)) warning.style.display = 'inline-flex';
+                else if (warning) warning.style.display = 'none';
+            } else {
+                if (warning) warning.style.display = 'none';
+            }
             if (due) backupData(true);
         }
         function saveAutoBackupFreq() { localStorage.setItem('aurora_backup_freq', document.getElementById('autoBackupSelect').value); showToast("Settings Saved"); checkAutoBackup(); }
